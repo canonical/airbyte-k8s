@@ -163,7 +163,7 @@ serviceAccount:
 
 # -- Sets the AIRBYTE_VERSION environment variable. Defaults to Chart.AppVersion.
 ## If changing the image tags below, you should probably also update this.
-version: ""
+version: "0.50.47"
 
 ## @section Webapp Parameters
 
