@@ -163,7 +163,7 @@ serviceAccount:
 
 # -- Sets the AIRBYTE_VERSION environment variable. Defaults to Chart.AppVersion.
 ## If changing the image tags below, you should probably also update this.
-version: ""
+version: "0.50.47"
 
 ## @section Webapp Parameters
 
@@ -1258,6 +1258,7 @@ postgresql:
   ## image.repository Repository for airbyte-db statefulset
   image:
     repository: airbyte/db
+    tag: dev-aa084c2cea
   # -- Airbyte Postgresql username
   postgresqlUsername: airbyte
   # -- Airbyte Postgresql password
