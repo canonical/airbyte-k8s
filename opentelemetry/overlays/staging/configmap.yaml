@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-collector-conf
+  namespace: stg-airbyte
+  labels:
+    app: opentelemetry
+    component: otel-collector-conf
+data:
+  otel-collector-config: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+    processors:
+      batch:
+      memory_limiter:
+        limit_mib: 1500
+        spike_limit_mib: 512
+        check_interval: 5s
+    exporters:
+      prometheus:
+        endpoint: "0.0.0.0:8889"
+        namespace: "stg-airbyte"
+    service:
+      pipelines:
+        metrics:
+          receivers: [otlp]
+          processors: [memory_limiter, batch]
+          exporters: [prometheus]
