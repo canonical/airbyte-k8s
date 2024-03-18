@@ -3,14 +3,13 @@
 set -e
 
 export RELEASE_NAME="${RELEASE_NAME:-airbyte}"
-export NAMESPACE="${NAMESPACE:stg-airbyte}"
-export INSTALL_TIMEOUT="${INSTALL_TIMEOUT:-1200s}"
+export INSTALL_TIMEOUT="${INSTALL_TIMEOUT:-600s}"
 
 usage() {
   echo "Airbyte Helm Chart CI Script"
   echo ""
   echo "Usage:"
-  echo "  ./ci.sh [command]"
+  echo "  ./ci.sh [command] [environment]"
   echo ""
   echo "Available Commands"
   echo ""
@@ -22,6 +21,8 @@ usage() {
   echo "update-docs             Regenerates the README.md documentation after making changes to the values.yaml"
   echo "check-docs-updated      Fails if changes values.yaml and README.md documentation are out of sync"
   echo "help                    Displays help about this command"
+  echo "Options:"
+  echo " [environment]          Environment to deploy to (staging or production)"
 }
 
 if ! helm repo list | grep "bitnami" > /dev/null 2>&1; then
@@ -32,6 +33,23 @@ if [ ! -d ./charts ]; then
   helm dep build
 fi
 
+case "$2" in
+  staging)
+    NAMESPACE="stg-airbyte"
+    ;;
+  
+  production)
+    NAMESPACE="prod-airbyte"
+    ;;
+  
+  *)
+    if [[ "$1" == "test" || "$1" == "diagnostics" || "$1" == "install" ]]; then
+        echo "Invalid environment specified (must be staging or production)"
+        usage
+        exit 1
+    fi
+    ;;
+esac
 
 case "$1" in
   lint)
