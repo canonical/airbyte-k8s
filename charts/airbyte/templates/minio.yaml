@@ -42,12 +42,12 @@ spec:
             - name: MINIO_ROOT_USER
               valueFrom:
                 secretKeyRef:
-                  name: airbyte-airbyte-secrets
+                  name: {{ .Values.global.database.secretName }}
                   key: STATE_STORAGE_MINIO_ACCESS_KEY
             - name: MINIO_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: airbyte-airbyte-secrets
+                  name: {{ .Values.global.database.secretName }}
                   key: STATE_STORAGE_MINIO_SECRET_ACCESS_KEY
           ports:
             - containerPort: 9000
@@ -110,12 +110,12 @@ spec:
         - name: MINIO_ACCESS_KEY
           valueFrom:
             secretKeyRef:
-              name: airbyte-airbyte-secrets
+              name: {{ .Values.global.database.secretName }}
               key: STATE_STORAGE_MINIO_ACCESS_KEY
         - name: MINIO_SECRET_KEY
           valueFrom:
             secretKeyRef:
-              name: airbyte-airbyte-secrets
+              name: {{ .Values.global.database.secretName }}
               key: STATE_STORAGE_MINIO_SECRET_ACCESS_KEY
         - name: MINIO_ENDPOINT
           value: {{ .Values.minio.endpoint }}

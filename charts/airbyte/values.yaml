@@ -9,6 +9,8 @@ global:
   # -- Edition; "community" or "pro"
   edition: "community"
 
+  useExistingSecrets: true
+
   # -- Environment variables
   env_vars: {}
   # Database configuration override
