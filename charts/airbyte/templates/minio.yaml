@@ -105,7 +105,8 @@ spec:
           /usr/bin/mc mb --ignore-existing myminio/state-storage;
           /usr/bin/mc policy set public myminio/state-storage;
           /usr/bin/mc mb --ignore-existing myminio/airbyte-dev-logs;
-          /usr/bin/mc policy set public myminio/airbyte-dev-logs;"]
+          /usr/bin/mc policy set public myminio/airbyte-dev-logs;
+          /usr/bin/mc ilm import myminio/airbyte-dev-logs <<< '{\"Rules\":[{\"Expiration\":{\"Days\":5},\"Filter\":{\"Prefix\":\"\"},\"Status\":\"Enabled\",\"ID\":\"ttl\"}]}';"]
       env:
         - name: MINIO_ACCESS_KEY
           valueFrom:
