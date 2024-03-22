@@ -176,6 +176,12 @@
       "steppedLine": false,
       "targets": [
         {
+          "expr": "sum(avg(rate(container_cpu_usage_seconds_total{namespace=\"stg-airbyte\"}[5m])) by (pod) / ignoring (pod) group_left sum (rate (container_cpu_usage_seconds_total{namespace=\"stg-airbyte\"}[5m])) * 100)",
+          "interval": "",
+          "legendFormat": "Total (%)",
+          "refId": "B"
+        },
+        {
           "expr": "avg(rate(container_cpu_usage_seconds_total{namespace=\"stg-airbyte\"}[5m])) by (pod) / ignoring (pod) group_left sum (rate (container_cpu_usage_seconds_total{namespace=\"stg-airbyte\"}[5m])) * 100",
           "interval": "",
           "legendFormat": "{{ pod }}",
@@ -2154,8 +2160,8 @@
     "list": []
   },
   "time": {
-    "from": "2024-03-22T11:39:30.285Z",
-    "to": "2024-03-22T12:09:30.285Z"
+    "from": "now-5m",
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -2173,5 +2179,5 @@
   "timezone": "",
   "title": "Airbyte Staging",
   "uid": "z__lGj0Sk",
-  "version": 40
+  "version": 42
 }
