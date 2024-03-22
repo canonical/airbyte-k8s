@@ -38,6 +38,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "prometheus - Juju generated source",
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -53,7 +54,7 @@
         "y": 1
       },
       "hiddenSeries": false,
-      "id": 42,
+      "id": 56,
       "legend": {
         "avg": false,
         "current": false,
@@ -79,17 +80,17 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(rate(container_cpu_usage_seconds_total{namespace=\"stg-airbyte\"}[5m])) / sum(container_spec_cpu_quota{namespace=\"stg-airbyte\"}/container_spec_cpu_period{namespace=\"stg-airbyte\"}) * 100)",
+          "expr": "sum (rate (container_cpu_usage_seconds_total{namespace=\"stg-airbyte\"}[5m])) / sum (machine_cpu_cores) * 100",
           "interval": "",
-          "legendFormat": "",
-          "refId": "B"
+          "legendFormat": "Total (%)",
+          "refId": "A"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "CPU Usage %",
+      "title": "CPU Usage",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -175,9 +176,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg(rate(container_cpu_usage_seconds_total{namespace=\"stg-airbyte\"}[5m])) by (pod)",
+          "expr": "avg(rate(container_cpu_usage_seconds_total{namespace=\"stg-airbyte\"}[5m])) by (pod) / ignoring (pod) group_left sum (rate (container_cpu_usage_seconds_total{namespace=\"stg-airbyte\"}[5m])) * 100",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "{{ pod }}",
           "refId": "A"
         }
       ],
@@ -185,7 +186,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Average CPU usage per pod",
+      "title": "CPU usage per pod (%)",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -201,7 +202,7 @@
       },
       "yaxes": [
         {
-          "format": "short",
+          "format": "percent",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -228,6 +229,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "prometheus - Juju generated source",
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -263,7 +265,16 @@
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [],
+      "seriesOverrides": [
+        {
+          "alias": "Total Usage (GB)",
+          "yaxis": 1
+        },
+        {
+          "alias": "/-/",
+          "yaxis": 2
+        }
+      ],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -271,15 +282,21 @@
         {
           "expr": "sum(container_memory_usage_bytes{namespace=\"stg-airbyte\"}) / 1024 / 1024 / 1024",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "Total Usage (GB)",
           "refId": "A"
+        },
+        {
+          "expr": "sum(container_memory_usage_bytes{namespace=\"stg-airbyte\"}) by (pod) / ignoring (pod) group_left sum(container_memory_usage_bytes{namespace=\"stg-airbyte\"}) * 100",
+          "interval": "",
+          "legendFormat": "{{ pod }}",
+          "refId": "B"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Total Memory Usage (GB)",
+      "title": "Memory Usage (Total and per pod)",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -296,15 +313,16 @@
       "yaxes": [
         {
           "format": "short",
-          "label": null,
+          "label": "GB",
           "logBase": 1,
           "max": null,
           "min": null,
           "show": true
         },
         {
-          "format": "short",
-          "label": null,
+          "decimals": null,
+          "format": "percent",
+          "label": "",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -365,7 +383,7 @@
         {
           "expr": "max(max_over_time(container_memory_max_usage_bytes{namespace=\"stg-airbyte\"}[5m])) / 1024 / 1024 / 1024",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "Usage (GB)",
           "refId": "A"
         }
       ],
@@ -393,7 +411,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -459,7 +477,7 @@
         {
           "expr": "(sum(container_memory_working_set_bytes{namespace=\"stg-airbyte\"}) / sum(container_spec_memory_limit_bytes{namespace=\"stg-airbyte\"} > 0) * 100)",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "Total (%)",
           "refId": "A"
         }
       ],
@@ -554,13 +572,13 @@
         {
           "expr": "sum(rate(container_network_transmit_bytes_total{namespace=\"stg-airbyte\"}[5m])) / 1024 / 1024",
           "interval": "",
-          "legendFormat": "Transmitted",
+          "legendFormat": "Transmitted (MB)",
           "refId": "A"
         },
         {
           "expr": "sum(rate(container_network_receive_bytes_total{namespace=\"stg-airbyte\"}[5m])) / 1024 / 1024",
           "interval": "",
-          "legendFormat": "Received",
+          "legendFormat": "Received (MB)",
           "refId": "B"
         }
       ],
@@ -568,7 +586,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Total Network Receive and Transmit (MB)",
+      "title": "Total Network Receive and Transmit",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2136,8 +2154,8 @@
     "list": []
   },
   "time": {
-    "from": "now-5m",
-    "to": "now"
+    "from": "2024-03-22T11:39:30.285Z",
+    "to": "2024-03-22T12:09:30.285Z"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -2155,5 +2173,5 @@
   "timezone": "",
   "title": "Airbyte Staging",
   "uid": "z__lGj0Sk",
-  "version": 37
+  "version": 40
 }
