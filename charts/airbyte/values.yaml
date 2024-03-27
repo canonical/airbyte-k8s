@@ -1330,7 +1330,7 @@ minio:
     rootUser: ""
     rootPassword: ""
   storage:
-    volumeClaimValue: 5Gi
+    volumeClaimValue: 100Gi
 
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
   ##
