@@ -14,9 +14,9 @@ patches:
       - op: replace
         path: /spec/template/metadata/namespace
         value: prod-airbyte
-        - target:
-          kind: Service
-        patch: |
-          - op: replace
-            path: /metadata/namespace
-            value: prod-airbyte
+  - target:
+      kind: Service
+    patch: |
+      - op: replace
+        path: /metadata/namespace
+        value: prod-airbyte
