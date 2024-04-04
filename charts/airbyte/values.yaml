@@ -97,19 +97,12 @@ global:
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube.
   jobs:
-    resources:
-      ## Example:
-      ## requests:
-      ##    memory: 256Mi
-      ##    cpu: 250m
-      # -- Job resource requests
-      requests: {}
-      ## Example:
-      ## limits:
-      ##    cpu: 200m
-      ##    memory: 1Gi
-      # -- Job resource limits
-      limits: {}
+    requests:
+      memory: 2Gi
+      cpu: 1500m
+    limits:
+      memory: 4Gi
+      cpu: 2
 
     kube:
       ## JOB_KUBE_ANNOTATIONS
@@ -548,18 +541,12 @@ server:
   ## resources, such as Minikube. If you do want to specify resources, uncomment the following
   ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   resources:
-    ## Example:
-    ## limits:
-    ##    cpu: 200m
-    ##    memory: 1Gi
-    # -- The resources limits for the server container
-    limits: {}
-    ## Examples:
-    ## requests:
-    ##    memory: 256Mi
-    ##    cpu: 250m
-    # -- The requested resources for the server container
-    requests: {}
+    requests:
+      memory: 2Gi
+      cpu: 1
+    limits:
+      memory: 4Gi
+      cpu: 2
 
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
   nodeSelector: {}
@@ -720,18 +707,12 @@ worker:
   ## resources, such as Minikube. If you do want to specify resources, uncomment the following
   ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   resources:
-    ## Example:
-    ## limits:
-    ##    cpu: 200m
-    ##    memory: 1Gi
-    #! -- The resources limits for the worker container
-    limits: {}
-    ## Examples:
-    ## requests:
-    ##    memory: 256Mi
-    ##    cpu: 250m
-    # -- The requested resources for the worker container
-    requests: {}
+    requests:
+      memory: 2Gi
+      cpu: 1
+    limits:
+      memory: 4Gi
+      cpu: 2
 
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
   nodeSelector: {}
@@ -853,18 +834,13 @@ workload-launcher:
   ## resources, such as Minikube. If you do want to specify resources, uncomment the following
   ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   resources:
-    ## Example:
-    ## limits:
-    ##    cpu: 200m
-    ##    memory: 1Gi
-    # -- The resources limits for the workload launcher container
-    limits: {}
-    ## Examples:
-    ## requests:
-    ##    memory: 256Mi
-    ##    cpu: 250m
-    # -- The requested resources for the workload launcher container
-    requests: {}
+    resources:
+      requests:
+        memory: 1Gi
+        cpu: 500m
+      limits:
+        memory: 3Gi
+        cpu: 1
 
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
   nodeSelector: {}
@@ -957,18 +933,13 @@ metrics:
   ## resources, such as Minikube. If you do want to specify resources, uncomment the following
   ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   resources:
-    ## Example:
-    ## limits:
-    ##    cpu: 200m
-    ##    memory: 1Gi
-    # -- The resources limits for the metrics-reporter container
-    limits: {}
-    ## Examples:
-    ## requests:
-    ##    memory: 256Mi
-    ##    cpu: 250m
-    # -- The requested resources for the metrics-reporter container
-    requests: {}
+    resources:
+      requests:
+        memory: 1Gi
+        cpu: 500m
+      limits:
+        memory: 3Gi
+        cpu: 1
 
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
   nodeSelector: {}
@@ -1241,18 +1212,12 @@ temporal:
   ## resources, such as Minikube. If you do want to specify resources, uncomment the following
   ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   resources:
-    ## Example:
-    ## requests:
-    ##    memory: 256Mi
-    ##    cpu: 250m
-    # -- The requested resources for temporal pods
-    requests: {}
-    ## Example:
-    ## limits:
-    ##    cpu: 200m
-    ##    memory: 1Gi
-    # -- The resources limits for temporal pods
-    limits: {}
+    requests:
+      memory: 2Gi
+      cpu: 1
+    limits:
+      memory: 4Gi
+      cpu: 2
 
   extraContainers: []
 
@@ -1405,18 +1370,12 @@ cron:
   ## resources, such as Minikube. If you do want to specify resources, uncomment the following
   ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   resources:
-    ## Example:
-    ## limits:
-    ##    cpu: 200m
-    ##    memory: 1Gi
-    # -- The resources limits for the cron container
-    limits: {}
-    ## Examples:
-    ## requests:
-    ##    memory: 256Mi
-    ##    cpu: 250m
-    # -- The requested resources for the cron container
-    requests: {}
+    requests:
+      memory: 2Gi
+      cpu: 1
+    limits:
+      memory: 4Gi
+      cpu: 2
 
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
   nodeSelector: {}
@@ -1558,18 +1517,13 @@ connector-builder-server:
   ## resources, such as Minikube. If you do want to specify resources, uncomment the following
   ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   resources:
-    ## Example:
-    ## limits:
-    ##    cpu: 200m
-    ##    memory: 1Gi
-    # -- The resources limits for the connector-builder-server container
-    limits: {}
-    ## Examples:
-    ## requests:
-    ##    memory: 256Mi
-    ##    cpu: 250m
-    # -- The requested resources for the connector-builder-server container
-    requests: {}
+    resources:
+      requests:
+        memory: 1Gi
+        cpu: 500m
+      limits:
+        memory: 3Gi
+        cpu: 1
 
   log:
     # -- The log level to log at.
@@ -1625,18 +1579,13 @@ airbyte-api-server:
   ## resources, such as Minikube. If you do want to specify resources, uncomment the following
   ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   resources:
-    ## Example:
-    ## limits:
-    ##    cpu: 200m
-    ##    memory: 1Gi
-    # -- The resources limits for the airbyte-api-server container
-    limits: {}
-    ## Examples:
-    ## requests:
-    ##    memory: 256Mi
-    ##    cpu: 250m
-    ## - The requested resources for the airbyte-api-server container
-    requests: {}
+    resources:
+      requests:
+        memory: 1Gi
+        cpu: 500m
+      limits:
+        memory: 3Gi
+        cpu: 1
 
   log:
     # -- The log level to log at.
@@ -1727,18 +1676,13 @@ workload-api-server:
   ## resources, such as Minikube. If you do want to specify resources, uncomment the following
   ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   resources:
-    ## Example:
-    ## limits:
-    ##    cpu: 200m
-    ##    memory: 1Gi
-    # -- The resources limits for the airbyte-workload-api-server container
-    limits: {}
-    ## Examples:
-    ## requests:
-    ##    memory: 256Mi
-    ##    cpu: 250m
-    # -- The requested resources for the airbyte-workload-api-server container
-    requests: {}
+    resources:
+      requests:
+        memory: 1Gi
+        cpu: 500m
+      limits:
+        memory: 3Gi
+        cpu: 1
 
   log:
     # -- The log level at which to log
