@@ -102,7 +102,7 @@ global:
       cpu: 1500m
     limits:
       memory: 4Gi
-      cpu: 2
+      cpu: 2000m
 
     kube:
       ## JOB_KUBE_ANNOTATIONS
@@ -543,10 +543,10 @@ server:
   resources:
     requests:
       memory: 2Gi
-      cpu: 1
+      cpu: 1000m
     limits:
       memory: 4Gi
-      cpu: 2
+      cpu: 2000m
 
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
   nodeSelector: {}
@@ -709,10 +709,10 @@ worker:
   resources:
     requests:
       memory: 2Gi
-      cpu: 1
+      cpu: 1000m
     limits:
       memory: 4Gi
-      cpu: 2
+      cpu: 2000m
 
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
   nodeSelector: {}
@@ -834,13 +834,12 @@ workload-launcher:
   ## resources, such as Minikube. If you do want to specify resources, uncomment the following
   ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   resources:
-    resources:
-      requests:
-        memory: 1Gi
-        cpu: 500m
-      limits:
-        memory: 3Gi
-        cpu: 1
+    requests:
+      memory: 1Gi
+      cpu: 500m
+    limits:
+      memory: 3Gi
+      cpu: 1000m
 
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
   nodeSelector: {}
@@ -933,13 +932,12 @@ metrics:
   ## resources, such as Minikube. If you do want to specify resources, uncomment the following
   ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   resources:
-    resources:
-      requests:
-        memory: 1Gi
-        cpu: 500m
-      limits:
-        memory: 3Gi
-        cpu: 1
+    requests:
+      memory: 1Gi
+      cpu: 500m
+    limits:
+      memory: 3Gi
+      cpu: 1000m
 
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
   nodeSelector: {}
@@ -1214,10 +1212,10 @@ temporal:
   resources:
     requests:
       memory: 2Gi
-      cpu: 1
+      cpu: 1000m
     limits:
       memory: 4Gi
-      cpu: 2
+      cpu: 2000m
 
   extraContainers: []
 
@@ -1372,10 +1370,10 @@ cron:
   resources:
     requests:
       memory: 2Gi
-      cpu: 1
+      cpu: 1000m
     limits:
       memory: 4Gi
-      cpu: 2
+      cpu: 2000m
 
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
   nodeSelector: {}
@@ -1517,13 +1515,12 @@ connector-builder-server:
   ## resources, such as Minikube. If you do want to specify resources, uncomment the following
   ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   resources:
-    resources:
-      requests:
-        memory: 1Gi
-        cpu: 500m
-      limits:
-        memory: 3Gi
-        cpu: 1
+    requests:
+      memory: 1Gi
+      cpu: 500m
+    limits:
+      memory: 3Gi
+      cpu: 1000m
 
   log:
     # -- The log level to log at.
@@ -1579,13 +1576,12 @@ airbyte-api-server:
   ## resources, such as Minikube. If you do want to specify resources, uncomment the following
   ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   resources:
-    resources:
-      requests:
-        memory: 1Gi
-        cpu: 500m
-      limits:
-        memory: 3Gi
-        cpu: 1
+    requests:
+      memory: 1Gi
+      cpu: 500m
+    limits:
+      memory: 3Gi
+      cpu: 1000m
 
   log:
     # -- The log level to log at.
@@ -1676,13 +1672,12 @@ workload-api-server:
   ## resources, such as Minikube. If you do want to specify resources, uncomment the following
   ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   resources:
-    resources:
-      requests:
-        memory: 1Gi
-        cpu: 500m
-      limits:
-        memory: 3Gi
-        cpu: 1
+    requests:
+      memory: 1Gi
+      cpu: 500m
+    limits:
+      memory: 3Gi
+      cpu: 1000m
 
   log:
     # -- The log level at which to log
