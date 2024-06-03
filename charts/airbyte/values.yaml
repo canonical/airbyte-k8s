@@ -12,7 +12,14 @@ global:
   useExistingSecrets: true
 
   # -- Environment variables
-  env_vars: {}
+  env_vars:
+    HTTP_PROXY: http://squid.internal:3128
+    HTTPS_PROXY: http://squid.internal:3128
+    NO_PROXY: "10.0.0.0/8,localhost,127.0.0.1,.internal,.cluster.local,.local,.svc,airbyte-*"
+    http_proxy: http://squid.internal:3128
+    https_proxy: http://squid.internal:3128
+    no_proxy: "10.0.0.0/8,localhost,127.0.0.1,.internal,.cluster.local,.local,.svc,airbyte-*"
+    JAVA_TOOL_OPTIONS: "-Dhttp.proxyHost=squid.internal -Dhttp.proxyPort=3128 -Dhttps.proxyHost=squid.internal -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=10.0.0.0|localhost|127.0.0.1|*.internal|*.cluster.local|*.local|*.svc|airbyte-*"
   # Database configuration override
   database:
     # -- Secret name where database credentials are stored
@@ -740,6 +747,13 @@ worker:
     PUBLISH_METRICS: "true"
     METRIC_CLIENT: "otel"
     OTEL_COLLECTOR_ENDPOINT: "http://otel-collector.stg-airbyte.svc.cluster.local:4317"
+    JOB_DEFAULT_ENV_http_proxy: http://squid.internal:3128
+    JOB_DEFAULT_ENV_https_proxy: http://squid.internal:3128
+    JOB_DEFAULT_ENV_no_proxy: "10.0.0.0/8,localhost,127.0.0.1,.internal,.cluster.local,.local,.svc,airbyte-*"
+    JOB_DEFAULT_ENV_HTTP_PROXY: http://squid.internal:3128
+    JOB_DEFAULT_ENV_HTTPS_PROXY: http://squid.internal:3128
+    JOB_DEFAULT_ENV_NO_PROXY: "10.0.0.0/8,localhost,127.0.0.1,.internal,.cluster.local,.local,.svc,airbyte-*"
+    JOB_DEFAULT_ENV_JAVA_TOOL_OPTIONS: "-Dhttp.proxyHost=squid.internal -Dhttp.proxyPort=3128 -Dhttps.proxyHost=squid.internal -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=10.0.0.0|localhost|127.0.0.1|*.internal|*.cluster.local|*.local|*.svc|airbyte-*"
   ## Examples (when using `worker.containerSecurityContext.readOnlyRootFilesystem=true`):
   ## extraVolumeMounts:
   ##   - name: tmpdir

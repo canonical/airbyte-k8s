@@ -3,7 +3,7 @@
 set -e
 
 export RELEASE_NAME="${RELEASE_NAME:-airbyte}"
-export INSTALL_TIMEOUT="${INSTALL_TIMEOUT:-600s}"
+export INSTALL_TIMEOUT="${INSTALL_TIMEOUT:-1200s}"
 
 usage() {
   echo "Airbyte Helm Chart CI Script"
@@ -65,6 +65,7 @@ case "$1" in
       --create-namespace \
       --namespace "${NAMESPACE}" \
       --debug \
+      --force \
       --wait \
       --timeout "${INSTALL_TIMEOUT}" \
       "${RELEASE_NAME}" .
